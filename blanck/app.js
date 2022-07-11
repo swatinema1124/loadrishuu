@@ -44,7 +44,7 @@ app.get('/', async function(req,res){
     // Sending thee count of visitor to the browser
     res.send(`<h2>Counter: `+1+'</h2>')
 
-    // Logging when the app is visited first time
+    // Logging when the app or user is visited first time
     console.log("First visitor arrived")
   }
   else{
