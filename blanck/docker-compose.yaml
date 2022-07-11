@@ -1,0 +1,44 @@
+# DOCKER COMPOSE
+#
+version: "2.0"
+
+services:
+  mongo_server:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=example
+      - MONGO_INITDB_DATABASE=db
+    ports:
+      - "27017:27017"
+    container_name: my_db_rishabh
+  app-1:
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    image: rishabhbhojak/final
+    ports:
+      - '81:3000'
+    depends_on:
+      - mongo_server
+
+  app-2:
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    image: rishabhbhojak/final3001
+    ports:
+      - '82:3001'
+    depends_on:
+      - mongo_server
+  nginx:
+     #image: nginx
+    build:
+      context: ./nginx/
+      dockerfile: Dockerfile
+    ports:
+      - '80:80'
+    depends_on:
+    - app-1
+    - app-2
+
